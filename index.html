@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NICKTON | Edição Completa 2026</title>
+    <style>
+        :root {
+            --primary: #ff4757; 
+            --accent: #2ed573; 
+            --paper: #e6e0cc;
+        }
+
+        body { 
+            margin: 0; font-family: 'Courier New', monospace; 
+            background: var(--paper); color: #000;
+            background-image: 
+                url('https://www.transparenttextures.com/patterns/handmade-paper.png'),
+                radial-gradient(circle at 10% 20%, rgba(0,0,0,0.05) 0%, transparent 20%);
+            background-attachment: fixed;
+            display: flex; flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden; /* Impede que os desenhos quebrem a margem */
+            position: relative;
+        }
+
+        /* --- DETALHES ARTÍSTICOS DE FUNDO (AS MARGENS) --- */
+        /* Rabisco 1: Topo Esquerdo */
+        body::before {
+            content: "NICKTON // ARCHIVE-774 // 2026";
+            position: fixed; top: 80px; left: -100px; font-size: 5rem;
+            font-family: 'Impact'; color: rgba(0,0,0,0.03); transform: rotate(-45deg); z-index: -1;
+        }
+        
+        /* Rabisco 2: Baixo Direito (Gravura) */
+        body::after {
+            content: "";
+            position: fixed; bottom: 20px; right: 20px; width: 300px; height: 300px;
+            background-image: url('https://cdn-icons-png.flaticon.com/512/103/103842.png'); /* Ícone de gravura */
+            background-size: contain; background-repeat: no-repeat;
+            opacity: 0.04; z-index: -1; transform: rotate(15deg);
+        }
+
+        header { 
+            background: #000; color: #fff; padding: 30px 20px; text-align: center;
+            border-bottom: 6px solid var(--primary);
+            position: sticky; top: 0; z-index: 1000;
+        }
+        header h1 { margin: 0; font-size: 3.5rem; font-family: 'Impact', sans-serif; letter-spacing: 5px; }
+
+        .main-container {
+            display: grid; grid-template-columns: 200px 1fr 350px; 
+            gap: 25px; padding: 25px; flex: 1;
+            max-width: 1650px; margin: 0 auto;
+            position: relative;
+        }
+
+        /* COLUNA 1: PERSONAGENS CIRCULARES (NA LATERAL) */
+        .sidebar-left { position: sticky; top: 180px; height: fit-content; display: flex; flex-direction: column; gap: 20px; align-items: center; }
+        .char-item { text-align: center; cursor: pointer; transition: 0.3s; width: 120px; }
+        .char-item:hover { transform: translateY(-5px); }
+        .char-circle {
+            width: 100px; height: 100px; border-radius: 50%; border: 4px solid #000;
+            overflow: hidden; background: #fff; box-shadow: 4px 4px 0px rgba(0,0,0,0.1); margin: 0 auto 10px;
+        }
+        .char-circle img { width: 100%; height: 100%; object-fit: cover; }
+        .char-item p { font-size: 13px; font-weight: 900; margin: 0; text-transform: uppercase; color: #000; }
+
+        /* COLUNA 2: CENTRO - NOTÍCIAS COM IMAGENS DISNEY */
+        .content-center { display: flex; flex-direction: column; gap: 20px; }
+        #news-banner {
+            height: 380px; border: 4px solid #000; background-size: cover; background-position: center;
+            display: flex; align-items: flex-end; box-shadow: 10px 10px 0px #000;
+            transition: background-image 0.8s ease-in-out;
+        }
+        .banner-overlay { background: rgba(0,0,0,0.8); padding: 25px; width: 100%; color: #fff; border-top: 3px solid var(--accent); }
+        .banner-overlay h3 { margin: 0; font-family: 'Impact'; font-size: 1.8rem; color: var(--accent); }
+
+        #dossie-box { 
+            background: #fff; border: 4px solid #000; padding: 50px; 
+            box-shadow: 20px 20px 0px rgba(0,0,0,0.1); min-height: 500px;
+            background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
+        }
+        #portal-texto { font-size: 1.25rem; line-height: 1.8; color: #000 !important; font-weight: 700; text-align: justify; }
+
+        /* COLUNA 3: DIREITA - PRETO (HUB E BOT) */
+        .sidebar-right { position: sticky; top: 180px; height: fit-content; display: flex; flex-direction: column; gap: 20px; }
+        .sidebar-box { background: #000; color: #fff; padding: 25px; border-left: 6px solid var(--accent); box-shadow: 6px 6px 0px rgba(0,0,0,0.15); }
+        .sidebar-box h2 { color: var(--accent); font-size: 1.2rem; margin-top: 0; border-bottom: 2px solid #333; padding-bottom: 5px; text-transform: uppercase; }
+        
+        .link-list { list-style: none; padding: 0; margin: 0; }
+        .link-list li { margin-bottom: 12px; border-bottom: 1px solid #222; padding-bottom: 5px; }
+        .link-list a { color: #fff; text-decoration: none; font-weight: bold; font-size: 14px; display: flex; align-items: center; }
+        .link-list a:hover { color: var(--primary); }
+        .live-tag { background: red; color: white; font-size: 9px; padding: 2px 5px; border-radius: 2px; margin-right: 8px; font-weight: 900; }
+
+        #chat-container { background: #000; border: 3px solid #000; box-shadow: 8px 8px 0px rgba(0,0,0,0.15); }
+        #chat-messages { height: 160px; overflow-y: auto; background: #111; padding: 12px; font-size: 12px; color: var(--accent); }
+        .chat-input-area { display: flex; padding: 10px; border-top: 1px solid #333; }
+        #user-input { flex: 1; padding: 10px; background: #222; border: 1px solid var(--accent); color: #fff; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>NICKTON</h1>
+    <p style="color:var(--primary); font-weight:bold; letter-spacing:2px;">O MAIOR ACERVO NOSTÁLGICO • EDIÇÃO ESPECIAL</p>
+</header>
+
+<div class="main-container">
+    <aside class="sidebar-left">
+        <div class="char-item" onclick="abrirDossie('iCarly')"><div class="char-circle"><img src="icarly1.webp" alt="iC"></div><p>iCarly</p></div>
+        <div class="char-item" onclick="abrirDossie('Ben 10')"><div class="char-circle"><img src="ben10.jpg" alt="B10"></div><p>Ben 10</p></div>
+        <div class="char-item" onclick="abrirDossie('Hora de Aventura')"><div class="char-circle"><img src="finn.jpg" alt="Finn"></div><p>Finn</p></div>
+        <div class="char-item" onclick="abrirDossie('Gumball')"><div class="char-circle"><img src="gumball.jpg" alt="GB"></div><p>Gumball</p></div>
+        <div class="char-item" onclick="abrirDossie('Big time rush')"><div class="char-circle"><img src="bigtimerush.webp" alt="RS"></div><p>big time rush</p></div>
+        
+        <div style="font-size: 30px; opacity: 0.1;">📜 📡 📺</div>
+    </aside>
+
+    <main class="content-center">
+        <div id="news-banner">
+            <div class="banner-overlay">
+                <h3 id="car-title">NICKTON MULTIVERSO</h3>
+                <p id="car-desc">Sincronizando as transmissões...</p>
+            </div>
+        </div>
+        
+        <div id="dossie-box">
+            <div id="portal-texto">
+                <h2 style="margin-top:0;">ARQUIVO CENTRAL</h2>
+                <p>O sistema está operando em contraste total. As notícias acima são atualizadas com as novidades do mundo geek e ilustradas com imagens da Disney.</p>
+                <p>Verifique as margens da página: os detalhes artísticos flutuam no fundo para enriquecer o visual.</p>
+                <div style="text-align: center; margin-top: 50px; opacity: 0.1; font-size: 50px;">❖ ❖ ❖</div>
+            </div>
+        </div>
+    </main>
+
+    <aside class="sidebar-right">
+        <div class="sidebar-box">
+            <h2>HUB DE TRANSMISSÃO (LIVE)</h2>
+            <ul class="link-list">
+                <li><a href="https://pluto.tv/br/live-tv/nick-retro-br" target="_blank"><span class="live-tag">LIVE</span> Pluto TV Nick Retrô</a></li>
+                <li><a href="https://pluto.tv/br/live-tv/nick-jr-club-br" target="_blank"><span class="live-tag">LIVE</span> Pluto TV Nick Jr</a></li>
+                <li><a href="https://www.vix.com/tv/canal/kids_and_family_br" target="_blank"><span class="live-tag">LIVE</span> ViX Kids & Família</a></li>
+                <li><a href="https://www.youtube.com/c/NickelodeonemPortugues/live" target="_blank">➔ YouTube Nick Ao Vivo</a></li>
+                <li><a href="https://www.youtube.com/c/CartoonNetworkBrasil/live" target="_blank">➔ YouTube Cartoon Live</a></li>
+                <li><a href="https://archive.org/details/animationlibrary" target="_blank">➔ Acervo Histórico (Archive)</a></li>
+            </ul>
+        </div>
+
+        <div id="chat-container">
+            <div id="chat-header">NICKTON BOT</div>
+            <div id="chat-messages">> Database pronta.</div>
+            <div class="chat-input-area">
+                <input type="text" id="user-input" placeholder="Buscar...">
+                <button onclick="enviarChat()" style="background:var(--accent); border:none; padding:8px 15px; cursor:pointer; font-weight:bold; color: #000;">IR</button>
+            </div>
+        </div>
+    </aside>
+</div>
+
+<script>
+    const MINHA_CHAVE = "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";
+
+    const noticias = [
+        { t: "Nostalgia: Festivais Geek Chegando", d: "Prepare-se para os maiores eventos da cultura pop.", img: "https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=1200" },
+        { t: "Futuro das Animações no Multiverso", d: "Executivos discutem as tendências para o mercado geek.", img: "https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=1200" },
+        { t: "Disney+ & Reboots Confidenciais", d: "Rumores apontam o retorno de clássicos queridos.", img: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1200" }
+    ];
+
+    let nIdx = 0;
+    function rodarNoticias() {
+        const item = noticias[nIdx];
+        const ban = document.getElementById('news-banner');
+        ban.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.85)), url('${item.img}')`;
+        document.getElementById('car-title').innerText = item.t;
+        document.getElementById('car-desc').innerText = item.d;
+        nIdx = (nIdx + 1) % noticias.length;
+    }
+    setInterval(rodarNoticias, 6000); rodarNoticias();
+
+    async function abrirDossie(termo) {
+        const area = document.getElementById('portal-texto');
+        area.innerHTML = "<h2>BUSCANDO TRANSMISSÃO...</h2>";
+        window.scrollTo({ top: document.getElementById('dossie-box').offsetTop - 120, behavior: 'smooth' });
+        try {
+            const resp = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+                method: "POST",
+                headers: { "Authorization": `Bearer ${MINHA_CHAVE}`, "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    model: "llama-3.3-70b-versatile",
+                    messages: [{ role: "system", content: "Escreva um dossiê jornalístico nostálgico longo (800+ palavras)." }, { role: "user", content: "Dossiê de " + termo }]
+                })
+            });
+            const data = await resp.json();
+            area.innerHTML = `<h2>${termo.toUpperCase()}</h2><p>${data.choices[0].message.content.replace(/\n/g, '<br>')}</p>`;
+        } catch(e) { area.innerHTML = "<h2>Erro no sinal.</h2>"; }
+    }
+
+    function enviarChat() {
+        const input = document.getElementById('user-input');
+        if(input.value) {
+            document.getElementById('chat-messages').innerHTML += `<div>> BUSCAR: ${input.value}</div>`;
+            const t = input.value;
+            setTimeout(() => {
+                document.getElementById('chat-messages').innerHTML += `<div style="color:#fff; cursor:pointer; text-decoration: underline;" onclick="abrirDossie('${t}')">➔ Ver Dossiê</div>`;
+                document.getElementById('chat-messages').scrollTop = document.getElementById('chat-messages').scrollHeight;
+            }, 500); input.value = "";
+        }
+    }
+</script>
+</body>
+</html>
